@@ -1,0 +1,64 @@
+# Библиография
+
+## Лекция 1. Наблюдения, классификация, ранняя Вселенная
+
+1. **Event Horizon Telescope Collaboration.** “First M87 Event Horizon Telescope Results. I. The Shadow of the Supermassive Black Hole.” *The Astrophysical Journal Letters* 875, L1 (2019). DOI: https://doi.org/10.3847/2041-8213/ab0ec7.
+2. **Event Horizon Telescope Collaboration.** “First Sagittarius A* Event Horizon Telescope Results. I. The Shadow of the Supermassive Black Hole in the Center of the Milky Way.” *ApJL* 930, L12 (2022). DOI: https://doi.org/10.3847/2041-8213/ac6674.
+3. **Event Horizon Telescope Collaboration.** “First Sagittarius A* Event Horizon Telescope Results. VI. Testing the Black Hole Metric.” *ApJL* 930, L17 (2022). DOI: https://doi.org/10.3847/2041-8213/ac6756.
+4. **Bogdán, Á. et al.** “Evidence for heavy-seed origin of early supermassive black holes from a z ≈ 10 X-ray quasar.” *Nature Astronomy* 8, 126–133 (2024). DOI: https://doi.org/10.1038/s41550-023-02111-9.
+5. **LIGO Scientific Collaboration, Virgo Collaboration, KAGRA Collaboration.** “GWTC-3: Compact Binary Coalescences Observed by LIGO and Virgo during the Second Part of the Third Observing Run.” *Physical Review X* 13, 041039 (2023). DOI: https://doi.org/10.1103/PhysRevX.13.041039.
+6. **Sahu, K. C. et al.** “An Isolated Stellar-mass Black Hole Detected through Astrometric Microlensing.” *The Astrophysical Journal* 933, 83 (2022). DOI: https://doi.org/10.3847/1538-4357/ac739e.
+7. **Murchikova, L. & Sahu, K. C.** “Observability of Isolated Stellar-mass Black Holes.” *The Astrophysical Journal Letters* 988, L12 (2025). DOI: https://doi.org/10.3847/2041-8213/ade7f8.
+8. **Vaida, D. D. & Farber, R. J.** “Little red dots: the assembly of early supermassive black holes in the JWST Era.” *Frontiers in Astronomy and Space Sciences* 13:1779045 (2026). DOI: https://doi.org/10.3389/fspas.2026.1779045.
+9. **Suh, H. et al.** “A super-Eddington-accreting black hole ~1.5 Gyr after the Big Bang observed with JWST.” *Nature Astronomy* 9, 271–279 (2025). DOI: https://doi.org/10.1038/s41550-024-02402-9.
+10. **NASA Science.** “Black Holes: Types / overview.” URL: https://science.nasa.gov/universe/black-holes/types/.
+11. **Thorne, K. S.** *Black Holes and Time Warps: Einstein’s Outrageous Legacy.* W. W. Norton, 1994.
+12. **Quanta Magazine.** “Can Information Escape a Black Hole?” (2024). URL: https://www.quantamagazine.org/can-information-escape-a-black-hole-20240411/.
+
+## Лекция 2. ОТО, метрики, горизонт, тень
+
+13. **Einstein, A.** “Die Feldgleichungen der Gravitation.” *Sitzungsberichte der Königlich Preußischen Akademie der Wissenschaften*, 844–847 (1915). ADS: https://ui.adsabs.harvard.edu/abs/1915SPAW....844E/abstract.
+14. **Schwarzschild, K.** “Über das Gravitationsfeld eines Massenpunktes nach der Einsteinschen Theorie.” *Sitzungsberichte der Königlich Preußischen Akademie der Wissenschaften*, 189–196 (1916). ADS: https://ui.adsabs.harvard.edu/abs/1916SPAW....189S/abstract.
+15. **Kerr, R. P.** “Gravitational Field of a Spinning Mass as an Example of Algebraically Special Metrics.” *Physical Review Letters* 11, 237–238 (1963). DOI: https://doi.org/10.1103/PhysRevLett.11.237.
+16. **Penrose, R.** “Gravitational Collapse and Space-Time Singularities.” *Physical Review Letters* 14, 57 (1965). DOI: https://doi.org/10.1103/PhysRevLett.14.57.
+17. **Johannsen, T. et al.** “Testing General Relativity with the Shadow Size of Sgr A*.” *Physical Review Letters* 116, 031101 (2016). DOI: https://doi.org/10.1103/PhysRevLett.116.031101.
+18. **Psaltis, D. et al. / EHT Collaboration.** “Gravitational Test beyond the First Post-Newtonian Order with the Shadow of the M87 Black Hole.” *Physical Review Letters* 125, 141104 (2020). DOI: https://doi.org/10.1103/PhysRevLett.125.141104.
+19. **Ricarte, A. et al.** “Observational Signatures of Frame Dragging in Strong Gravity.” *The Astrophysical Journal Letters* 941, L12 (2022). DOI: https://doi.org/10.3847/2041-8213/aca087.
+20. **Lu, R.-S. et al.** “A ring-like accretion structure in M87 connecting its black hole and jet.” *Nature* 616, 686–690 (2023). DOI: https://doi.org/10.1038/s41586-023-05843-w.
+21. **Event Horizon Telescope Collaboration.** “The persistent shadow of the supermassive black hole of M87. I.” *Astronomy & Astrophysics* 681, A79 (2024). DOI: https://doi.org/10.1051/0004-6361/202347932.
+22. **Younsi, Z. et al.** “Black Hole Images as Tests of General Relativity: Effects of Spacetime Geometry.” *The Astrophysical Journal* 942, 47 (2023). DOI: https://doi.org/10.3847/1538-4357/aca58a.
+23. **Thorne, K. S.** *The Science of Interstellar.* W. W. Norton, 2014. ISBN 9780393351378.
+24. **Quanta Magazine.** “To See Black Holes in Stunning Detail, She Uses ‘Echoes’ Like a Bat.” (2024). URL: https://www.quantamagazine.org/to-see-black-holes-in-detail-she-uses-echoes-like-a-bat-20240212/.
+25. **ngEHT Collaboration / Living Reviews.** “Fundamental physics opportunities with the next-generation Event Horizon Telescope.” *Living Reviews in Relativity* 28, 4 (2025). DOI: https://doi.org/10.1007/s41114-025-00057-0.
+
+## Лекция 3. Сингулярность, энтропия, излучение Хокинга
+
+26. **Bekenstein, J. D.** “Black Holes and Entropy.” *Physical Review D* 7, 2333–2346 (1973). DOI: https://doi.org/10.1103/PhysRevD.7.2333.
+27. **Hawking, S. W.** “Black hole explosions?” *Nature* 248, 30–31 (1974). DOI: https://doi.org/10.1038/248030a0.
+28. **Kolobov, V. I. et al.** “Observation of stationary spontaneous Hawking radiation and the time evolution of an analogue black hole.” *Nature Physics* 17, 362–367 (2021). DOI: https://doi.org/10.1038/s41567-020-01076-0. Аналоговая система.
+29. **Almheiri, A., Marolf, D., Polchinski, J., Stanford, D., Sully, J.** “An Apologia for Firewalls.” *JHEP* 09, 018 (2013). DOI: https://doi.org/10.1007/JHEP09(2013)018.
+30. **Mathur, S. D.** “The fuzzball proposal for black holes: an elementary review.” *Fortschritte der Physik* 53, 793–827 (2005). DOI: https://doi.org/10.1002/prop.200410203.
+31. **Skenderis, K. & Taylor, M.** “The fuzzball proposal for black holes.” *Physics Reports* 467, 117–171 (2008). DOI: https://doi.org/10.1016/j.physrep.2008.08.001.
+32. **Bena, I., Martinec, E. J., Mathur, S. D., Warner, N. P.** “Fuzzballs and Microstate Geometries: Black-Hole Structure in String Theory.” arXiv:2204.13113 (2022). URL: https://arxiv.org/abs/2204.13113.
+33. **Rovelli, C.** *White Holes.* Penguin / Riverhead, 2023. ISBN examples: 9781802062151 / 9780593545447.
+34. **Bueno, P., Cano, P. A., Hennigar, R. A.** “Regular black holes from pure gravity.” *Physics Letters B* 861, 139260 (2025). DOI: https://doi.org/10.1016/j.physletb.2025.139260.
+35. **Bueno, P., Cano, P. A., Hennigar, R. A., Murcia, Á. J.** “Dynamical Formation of Regular Black Holes.” *Physical Review Letters* 134, 181401 (2025). DOI: https://doi.org/10.1103/PhysRevLett.134.181401.
+36. **Bueno, P. et al.** “Regular black holes from Oppenheimer-Snyder collapse.” arXiv:2505.09680 (2025). URL: https://arxiv.org/abs/2505.09680.
+37. **ICCUB / ScienceDaily.** “Creation of black holes without singularities through pure gravity.” (2025). URL: https://www.sciencedaily.com/releases/2025/02/250213144437.htm.
+
+## Лекция 4. Информационный парадокс, голография, острова
+
+38. **Page, D. N.** “Information in black hole radiation.” *Physical Review Letters* 71, 3743 (1993). DOI: https://doi.org/10.1103/PhysRevLett.71.3743.
+39. **Page, D. N.** “Average entropy of a subsystem.” *Physical Review Letters* 71, 1291 (1993). DOI: https://doi.org/10.1103/PhysRevLett.71.1291.
+40. **’t Hooft, G.** “Dimensional Reduction in Quantum Gravity.” arXiv:gr-qc/9310026 (1993). URL: https://arxiv.org/abs/gr-qc/9310026.
+41. **Maldacena, J.** “The Large N Limit of Superconformal Field Theories and Supergravity.” arXiv:hep-th/9711200 (1997); *International Journal of Theoretical Physics* 38, 1113–1133 (1999). DOI: https://doi.org/10.1023/A:1026654312961; also ATMP DOI https://doi.org/10.4310/ATMP.1998.v2.n2.a1.
+42. **Susskind, L.** *The Black Hole War: My Battle with Stephen Hawking to Make the World Safe for Quantum Mechanics.* Little, Brown, 2008. ISBN 9780316016407 / 9780316032698.
+43. **Almheiri, A., Engelhardt, N., Marolf, D., Maxfield, H.** “The entropy of bulk quantum fields and the entanglement wedge of an evaporating black hole.” *JHEP* 12, 063 (2019). DOI: https://doi.org/10.1007/JHEP12(2019)063.
+44. **Penington, G.** “Entanglement wedge reconstruction and the information paradox.” *JHEP* 09, 002 (2020). DOI: https://doi.org/10.1007/JHEP09(2020)002.
+45. **Almheiri, A., Hartman, T., Maldacena, J., Shaghoulian, E., Tajdini, A.** “Replica wormholes and the entropy of Hawking radiation.” *JHEP* 05, 013 (2020). DOI: https://doi.org/10.1007/JHEP05(2020)013.
+46. **Almheiri, A., Hartman, T., Maldacena, J., Shaghoulian, E., Tajdini, A.** “The entropy of Hawking radiation.” *Reviews of Modern Physics* 93, 035002 (2021). DOI: https://doi.org/10.1103/RevModPhys.93.035002.
+47. **Quanta Magazine / George Musser.** “The Most Famous Paradox in Physics Nears Its End.” (2020). URL: https://www.quantamagazine.org/the-most-famous-paradox-in-physics-nears-its-end-20201029/.
+48. **Quanta Magazine.** “This Physicist Discovered an Escape From Hawking’s Black Hole Paradox.” (2021). URL: https://www.quantamagazine.org/netta-engelhardt-has-escaped-hawkings-black-hole-paradox-20210823/.
+49. **Quanta Magazine.** “A New Geometry for Einstein’s Theory of Relativity.” (2025). URL: https://www.quantamagazine.org/a-new-geometry-for-einsteins-theory-of-relativity-20250716/.
+50. **Quanta Magazine / Natalie Wolchover.** “The Year in Physics.” (2025). URL: https://www.quantamagazine.org/the-year-in-physics-20251217/.
+51. **Foucault, M.** “What is Enlightenment?” In *The Foucault Reader*, 32–50, Pantheon, 1984. URL: https://foucault.info/documents/foucault.whatIsEnlightenment.en/.
