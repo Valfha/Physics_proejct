@@ -5,6 +5,33 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Тест — Черные дыры</title>
 <link rel="stylesheet" href="../styles/main.css">
+<style>
+.quiz{display:grid;gap:1.25rem;margin-top:1rem}
+.q-card{background:rgba(255,250,240,.88);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:1.25rem 1.5rem}
+.q-card h3{margin:0 0 .85rem;font-size:1.1rem;letter-spacing:-.02em}
+.q-num{color:var(--orange);font-weight:850;margin-right:.35rem}
+.q-options{display:grid;gap:.5rem;margin:.25rem 0 0}
+.q-options label{display:flex;gap:.65rem;align-items:flex-start;padding:.65rem .85rem;border:1px solid var(--line);border-radius:14px;background:#fff;cursor:pointer;line-height:1.5}
+.q-options input[type=radio]{margin-top:.25rem;accent-color:var(--accent)}
+.q-options label:hover{border-color:var(--accent)}
+.q-options label.is-correct{border-color:#2f7a3d;background:#eaf6ec}
+.q-options label.is-wrong{border-color:#b3261e;background:#fbeceb}
+.q-match{display:grid;gap:.6rem;margin-top:.25rem}
+.q-match-row{display:grid;grid-template-columns:1fr auto;gap:.75rem;align-items:center;padding:.55rem .85rem;border:1px solid var(--line);border-radius:14px;background:#fff}
+.q-match-row.is-correct{border-color:#2f7a3d;background:#eaf6ec}
+.q-match-row.is-wrong{border-color:#b3261e;background:#fbeceb}
+.q-match-row select{font:inherit;padding:.35rem .55rem;border-radius:10px;border:1px solid var(--line);background:#fff;min-width:4.5rem}
+.q-explain{display:none;margin-top:.85rem;padding:.75rem 1rem;border-radius:14px;background:#eaf2ff;border:1px solid #cbdff7;font-size:.95rem}
+.q-explain.show{display:block}
+.q-explain strong{color:var(--accent)}
+.quiz-bar{position:sticky;bottom:1rem;display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;justify-content:space-between;padding:1rem 1.25rem;border-radius:20px;background:rgba(13,23,38,.95);color:#fff;box-shadow:var(--shadow);margin-top:1.5rem}
+.quiz-bar .button{background:#fff;color:var(--dark);border-color:#fff}
+.quiz-bar .button.secondary{background:transparent;color:#fff;border-color:rgba(255,255,255,.5)}
+.quiz-result{font-weight:850;letter-spacing:-.01em}
+.quiz-result .score{font-size:1.4rem}
+.quiz-result .grade{display:block;font-weight:600;opacity:.85;font-size:.92rem;margin-top:.15rem}
+.block-title{margin:1.5rem 0 .25rem;font-size:1rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:850}
+</style>
 </head>
 <body>
 <header class="site-header">
@@ -21,32 +48,24 @@
 <section class="page-title compact-title">
 <p class="eyebrow">Проверка понимания</p>
 <h1>Тест по модулю</h1>
-<p>32 вопроса по четырем лекциям. Тест проверяет не заучивание редких дат, а понимание основных идей: горизонт событий, ОТО, сингулярность, излучение Хокинга и информационный парадокс.</p>
+<p>32 вопроса по четырем лекциям. Тест проверяет не заучивание редких дат, а понимание основных идей: ОТО, горизонт событий, сингулярность, излучение Хокинга и информационный парадокс. Отвечайте по памяти, потом нажмите «Проверить ответы».</p>
 <div class="button-row">
-<a class="button" href="../assets/documents/TEST.txt">Скачать тест</a>
-<a class="button secondary" href="../assets/documents/ANSWER_KEY.txt">Скачать ответы</a>
+<a class="button secondary" href="../assets/documents/TEST.txt">Текстовая версия теста</a>
+<a class="button secondary" href="../assets/documents/ANSWER_KEY.txt">Ответы текстом</a>
 </div>
 </section>
-<section class="section two-column">
-<div class="content-card">
-<h2>Формат</h2>
-<ul>
-<li>32 вопроса;</li>
-<li>4 блока по лекциям;</li>
-<li>вопросы с одним правильным ответом;</li>
-<li>задания на соответствие;</li>
-<li>2 простые расчетные задачи.</li>
-</ul>
+
+<section class="section">
+<form id="quiz" class="quiz" novalidate></form>
+<div class="quiz-bar">
+<div class="quiz-result" id="result" aria-live="polite">Ответьте на вопросы и нажмите «Проверить ответы».</div>
+<div class="button-row" style="margin:0">
+<button type="button" class="button" id="check-btn">Проверить ответы</button>
+<button type="button" class="button secondary" id="reset-btn">Сбросить</button>
 </div>
-<div class="content-card">
-<h2>Как проходить</h2>
-<ol>
-<li>Сначала скачайте тест и ответьте без подсказок.</li>
-<li>После этого откройте файл с ответами.</li>
-<li>Если ошибка связана с формулировкой, вернитесь к соответствующей лекции.</li>
-</ol>
 </div>
 </section>
+
 <section class="section">
 <div class="content-card">
 <h2>Шкала самопроверки</h2>
@@ -56,12 +75,247 @@
 <li>18-23: базовая картина есть, стоит повторить сложные темы;</li>
 <li>менее 18: лучше пересмотреть лекции и пройти тест заново.</li>
 </ul>
-
 </div>
 </section>
 </main>
 <footer class="site-footer">
 <p>Образовательный проект по физике.</p>
 </footer>
+
+<script>
+const BLOCKS = [
+  {title:"Блок 1. Лекция 1. Что такое черная дыра на самом деле?", questions:[
+    {n:1,type:"single",q:"Что в курсе называется черной дырой?",
+      options:{A:"Любой темный объект, который не светится.",B:"Область пространства-времени с границей, изнутри которой нельзя отправить сигнал наружу.",C:"Очень плотная планета с твердой поверхностью.",D:"Облако темной материи, которое поглощает свет."},
+      correct:"B",explain:"Черная дыра в курсе определяется через область пространства-времени и границу невозврата, а не через цвет или поверхность."},
+    {n:2,type:"single",q:"Почему фраза «черная дыра — космический пылесос» неверна?",
+      options:{A:"Черные дыры вообще не имеют гравитации.",B:"Черные дыры отталкивают вещество на больших расстояниях.",C:"На расстоянии гравитация определяется прежде всего массой, а не самим названием «черная дыра».",D:"Черные дыры могут поглощать только свет, но не вещество."},
+      correct:"C",explain:"Черная дыра не «засасывает все вокруг» автоматически; на расстоянии важна масса объекта."},
+    {n:3,type:"single",q:"Какие пять концепций держат весь курс?",
+      options:{A:"Темная материя, темная энергия, Большой взрыв, экзопланеты, нейтрино.",B:"ОТО, горизонт событий, сингулярность, излучение Хокинга, информационный парадокс.",C:"Электромагнетизм, ядерная физика, химия звезд, плазма, космические лучи.",D:"GPS, телескопы, ракеты, спутники, радиосвязь."},
+      correct:"B",explain:"Пять концепций курса: ОТО, горизонт событий, сингулярность, излучение Хокинга, информационный парадокс."},
+    {n:4,type:"single",q:"Что корректнее всего говорить об изображениях EHT?",
+      options:{A:"EHT сделал обычную фотографию самого горизонта событий.",B:"EHT реконструировал радиоизображение излучения около черной дыры и её тени.",C:"EHT увидел сингулярность в центре черной дыры.",D:"EHT доказал, что все черные дыры не вращаются."},
+      correct:"B",explain:"Корректная формулировка: EHT реконструировал радиоизображение излучения около тени черной дыры, а не сфотографировал сам горизонт."},
+    {n:5,type:"single",q:"Что такое аккреционный диск?",
+      options:{A:"Твердая поверхность черной дыры.",B:"Вращающийся поток вещества вокруг компактного объекта.",C:"Слой темной материи внутри горизонта событий.",D:"Волна пространства-времени после слияния черных дыр."},
+      correct:"B",explain:"Аккреционный диск — это вращающийся поток вещества вокруг компактного объекта."},
+    {n:6,type:"single",q:"Почему разные методы наблюдения важны для изучения черных дыр?",
+      options:{A:"Потому что один красивый снимок всегда доказывает всю теорию окончательно.",B:"Потому что черные дыры можно изучать только через телескопы видимого света.",C:"Потому что независимые следы — движение звезд, горячий газ, тень, гравитационные волны — дают согласующуюся картину.",D:"Потому что гравитационные волны заменяют все остальные наблюдения."},
+      correct:"C",explain:"Надежность картины усиливается тем, что разные независимые методы дают согласующиеся результаты."},
+    {n:7,type:"single",q:"Что означает «солнечная масса»?",
+      options:{A:"Температура поверхности Солнца.",B:"Расстояние от Земли до Солнца.",C:"Масса нашего Солнца как удобная астрономическая единица.",D:"Яркость Солнца в видимом диапазоне."},
+      correct:"C",explain:"Солнечная масса — удобная единица массы, равная массе Солнца."},
+    {n:8,type:"match",q:"Соответствие: способы изучения черных дыр",
+      left:["Орбиты звезд и газа","Аккреционный диск","EHT-изображение","Гравитационные волны"],
+      right:{A:"Слияния компактных объектов и колебания пространства-времени.",B:"Движение тел вокруг темной массивной области.",C:"Горячее вещество, которое светится рядом с черной дырой.",D:"Яркое кольцо и темная область, связанные с излучением около тени."},
+      correct:["B","C","D","A"],explain:"1-B, 2-C, 3-D, 4-A."}
+  ]},
+  {title:"Блок 2. Лекция 2. ОТО и горизонт событий", questions:[
+    {n:9,type:"single",q:"Чем идея Эйнштейна о гравитации отличается от школьной ньютоновской картины?",
+      options:{A:"В ОТО гравитация связана с геометрией пространства-времени.",B:"В ОТО гравитация исчезает для света.",C:"В ОТО все тела всегда движутся по прямым линиям в обычном пространстве.",D:"В ОТО масса не влияет на движение."},
+      correct:"A",explain:"В ОТО гравитация связана не только с силой, а с геометрией пространства-времени."},
+    {n:10,type:"single",q:"Что такое пространство-время в самом простом смысле?",
+      options:{A:"Только трехмерное пространство без времени.",B:"Только время без пространства.",C:"Единая физическая картина, где важны и место события, и момент времени.",D:"Название телескопа для наблюдения черных дыр."},
+      correct:"C",explain:"Пространство-время объединяет вопрос «где?» и вопрос «когда?»."},
+    {n:11,type:"single",q:"Почему свет отклоняется рядом с массивным объектом?",
+      options:{A:"Потому что свет имеет большую массу покоя.",B:"Потому что в ОТО свет идет по путям, которые задает искривленное пространство-время.",C:"Потому что массивный объект работает как стеклянная линза.",D:"Потому что свет всегда притягивается магнитным полем."},
+      correct:"B",explain:"Свет следует путям, которые задает искривленное пространство-время."},
+    {n:12,type:"single",q:"Что показывает формула радиуса Шварцшильда r_s = 2GM/c²?",
+      options:{A:"Температуру поверхности звезды.",B:"Важный масштаб: если масса сжата внутрь этого радиуса, возникает горизонт событий для невращающегося случая.",C:"Скорость вращения черной дыры.",D:"Яркость аккреционного диска."},
+      correct:"B",explain:"Радиус Шварцшильда задает важный масштаб для невращающегося случая."},
+    {n:13,type:"single",q:"Почему горизонт событий лучше называть причинной границей?",
+      options:{A:"Потому что внутри него все будущие пути ведут внутрь, и сигнал наружу отправить нельзя.",B:"Потому что это твердая стенка, о которую ударяется вещество.",C:"Потому что на горизонте полностью исчезает гравитация.",D:"Потому что горизонт можно увидеть как светящуюся поверхность."},
+      correct:"A",explain:"Горизонт событий — причинная граница: внутри сигнал наружу уже не отправить."},
+    {n:14,type:"single",q:"Что такое эргосфера у вращающейся черной дыры?",
+      options:{A:"Область вне горизонта, где пространство-время увлекается вращением и нельзя оставаться полностью неподвижным относительно далекого наблюдателя.",B:"Центральная сингулярность.",C:"Внешний край аккреционного диска.",D:"Область, из которой уже невозможно выйти наружу."},
+      correct:"A",explain:"Эргосфера находится вне горизонта; из нее в принципе можно выйти, но нельзя оставаться неподвижным относительно далекого наблюдателя."},
+    {n:15,type:"single",q:"Радиус Шварцшильда для 10 солнечных масс (для массы Солнца r_s ≈ 3 км):",
+      options:{A:"0,3 км.",B:"3 км.",C:"30 км.",D:"3000 км."},
+      correct:"C",explain:"Радиус пропорционален массе: 10 × 3 км ≈ 30 км."},
+    {n:16,type:"match",q:"Соответствие: термины из лекции 2",
+      left:["Радиус Шварцшильда","Световой конус","Черная дыра Керра","Frame dragging"],
+      right:{A:"Схема возможных путей света и более медленных сигналов из события.",B:"Модель вращающейся черной дыры с массой и спином.",C:"Эффект «увлечения» пространства-времени вращающейся массой.",D:"Масштаб 2GM/c² для невращающегося случая."},
+      correct:["D","A","B","C"],explain:"1-D, 2-A, 3-B, 4-C."}
+  ]},
+  {title:"Блок 3. Лекция 3. Сингулярность и излучение Хокинга", questions:[
+    {n:17,type:"single",q:"Как в курсе лучше понимать сингулярность?",
+      options:{A:"Как точно наблюдаемую точку внутри черной дыры.",B:"Как сигнал, что классическая теория дошла до предела применимости.",C:"Как обычную твердую поверхность.",D:"Как облако горячего газа вокруг черной дыры."},
+      correct:"B",explain:"Сингулярность подается осторожно: как сигнал предела классической теории."},
+    {n:18,type:"single",q:"Что показала теорема Пенроуза в контексте лекции?",
+      options:{A:"Что проблема сингулярностей не сводится только к слишком идеальной сферической модели.",B:"Что все сингулярности уже экспериментально сфотографированы.",C:"Что ОТО не работает нигде во Вселенной.",D:"Что черные дыры не могут образовываться при коллапсе."},
+      correct:"A",explain:"Теорема Пенроуза показывает, что проблема сингулярностей не сводится к идеальной сферической модели."},
+    {n:19,type:"single",q:"Что такое энтропия черной дыры в простом объяснении курса?",
+      options:{A:"Цвет черной дыры на изображении EHT.",B:"Мера того, сколько внутренних вариантов может быть скрыто за одинаковым внешним видом.",C:"Скорость падения вещества в аккреционный диск.",D:"Расстояние от Земли до центра галактики."},
+      correct:"B",explain:"Энтропия — мера числа внутренних вариантов, скрытых за одинаковым внешним видом."},
+    {n:20,type:"single",q:"С чем связана энтропия черной дыры в формуле Бекенштейна-Хокинга?",
+      options:{A:"С площадью горизонта.",B:"Только с объемом внутри горизонта.",C:"Только с яркостью аккреционного диска.",D:"Только с возрастом черной дыры."},
+      correct:"A",explain:"В формуле Бекенштейна-Хокинга энтропия связана с площадью горизонта."},
+    {n:21,type:"single",q:"Что означает зависимость T_H ~ 1/M?",
+      options:{A:"Чем больше масса черной дыры, тем выше температура Хокинга.",B:"Чем меньше масса черной дыры, тем выше температура Хокинга.",C:"Температура Хокинга вообще не зависит от массы.",D:"Все черные дыры имеют одинаковую температуру."},
+      correct:"B",explain:"Если T_H обратно пропорциональна M, то меньшая черная дыра горячее."},
+    {n:22,type:"single",q:"Почему мы не видим излучение Хокинга у обычных астрофизических черных дыр?",
+      options:{A:"Потому что Хокинг никогда не предсказывал излучение.",B:"Потому что у больших черных дыр оно чрезвычайно слабое и очень холодное.",C:"Потому что оно полностью совпадает с видимым светом звезд.",D:"Потому что аккреционный диск полностью запрещает любые квантовые эффекты."},
+      correct:"B",explain:"Для обычных астрофизических черных дыр излучение Хокинга крайне слабое и холодное."},
+    {n:23,type:"single",q:"Если масса черной дыры стала в 2 раза меньше, как изменится её температура Хокинга (T_H ~ 1/M)?",
+      options:{A:"Уменьшится в 2 раза.",B:"Не изменится.",C:"Увеличится в 2 раза.",D:"Увеличится в 4 раза."},
+      correct:"C",explain:"При уменьшении массы в 2 раза температура по зависимости 1/M увеличится в 2 раза."},
+    {n:24,type:"match",q:"Соответствие: идеи о том, что может быть вместо классической сингулярности",
+      left:["Regular black hole","Fuzzball","White-hole bounce","Firewall"],
+      right:{A:"Идея, что классический гладкий горизонт может конфликтовать с сохранением информации.",B:"Теоретическая модель, где вместо сингулярности есть регулярная область.",C:"Идея из теории струн: микросостояния имеют сложную структуру на масштабе горизонта.",D:"Гипотеза, где сжатие может перейти в отскок."},
+      correct:["B","C","D","A"],explain:"1-B, 2-C, 3-D, 4-A."}
+  ]},
+  {title:"Блок 4. Лекция 4. Информационный парадокс", questions:[
+    {n:25,type:"single",q:"Что означает «информация» в физическом смысле этой лекции?",
+      options:{A:"Только текст в книге или файл на компьютере.",B:"Описание состояния системы: положения, движения, энергии, связи и квантовые состояния.",C:"Только сообщение, которое отправили по радио.",D:"Только изображение на экране телескопа."},
+      correct:"B",explain:"В физике информация — это описание состояния системы, а не только текст или файл."},
+    {n:26,type:"single",q:"Что такое унитарность в простом объяснении?",
+      options:{A:"Требование, что квантовая эволюция не стирает информацию фундаментально.",B:"Запрет на любое излучение.",C:"Правило, что все черные дыры имеют одинаковую массу.",D:"Утверждение, что время всегда идет одинаково для всех наблюдателей."},
+      correct:"A",explain:"Унитарность — квантовая эволюция не стирает информацию фундаментально."},
+    {n:27,type:"single",q:"Почему излучение Хокинга создает информационный парадокс?",
+      options:{A:"Потому что оно делает черные дыры ярче звезд.",B:"Потому что в полуклассическом расчете оно выглядит почти тепловым и как будто не несет подробностей о том, что упало внутрь.",C:"Потому что оно отменяет горизонт событий.",D:"Потому что оно доказывает, что квантовая физика не нужна."},
+      correct:"B",explain:"Проблема возникает потому, что излучение Хокинга в полуклассическом расчете выглядит почти тепловым."},
+    {n:28,type:"single",q:"Что показывает кривая Пейджа?",
+      options:{A:"Как должна меняться энтропия излучения при испарении, если информация сохраняется.",B:"Как меняется цвет аккреционного диска.",C:"Как быстро вращается черная дыра.",D:"Как телескоп EHT собирает радиосигналы."},
+      correct:"A",explain:"Кривая Пейджа показывает поведение энтропии излучения при испарении черной дыры."},
+    {n:29,type:"single",q:"Как выглядит ожидаемая кривая Пейджа при сохранении информации?",
+      options:{A:"Энтропия излучения все время растет до конца.",B:"Энтропия сразу равна нулю и никогда не меняется.",C:"Энтропия сначала растет, а после времени Пейджа начинает уменьшаться.",D:"Энтропия хаотично меняется без физического смысла."},
+      correct:"C",explain:"При сохранении информации энтропия сначала растет, а после времени Пейджа уменьшается."},
+    {n:30,type:"single",q:"Что грубо говорит голографический принцип?",
+      options:{A:"Горизонт черной дыры является обычным экраном телевизора.",B:"В системах с гравитацией информация об области может быть связана с её границей, а не только с объемом.",C:"Все черные дыры обязательно являются оптическими голограммами.",D:"Информация всегда исчезает при падении внутрь черной дыры."},
+      correct:"B",explain:"Голографический принцип связывает информацию в гравитационной системе с границей, а не только с объемом."},
+    {n:31,type:"single",q:"Что такое «остров» в современных расчетах информационного парадокса?",
+      options:{A:"Буквальный остров внутри черной дыры.",B:"Область, которую нужно учитывать при расчете энтропии излучения в гравитационной системе.",C:"Участок аккреционного диска, который светится ярче остальных.",D:"Планета, вращающаяся вокруг черной дыры."},
+      correct:"B",explain:"Остров — не буквальное место, а область, которую нужно учитывать в расчете энтропии."},
+    {n:32,type:"single",q:"Какой вывод об информационном парадоксе является самым корректным?",
+      options:{A:"Парадокс окончательно решен для всех реальных черных дыр, вопросов больше нет.",B:"Парадокс не существует, потому что черные дыры не испаряются даже теоретически.",C:"Острова и replica wormholes дают сильный прогресс в контролируемых моделях, но полная история для реальных черных дыр остается открытой.",D:"EHT напрямую увидел, как информация выходит из черной дыры."},
+      correct:"C",explain:"Современные расчеты с островами и replica wormholes дают сильный прогресс в контролируемых моделях, но не закрывают все вопросы о реальных черных дырах."}
+  ]}
+];
+
+const LETTERS=["A","B","C","D"];
+const form=document.getElementById("quiz");
+const resultEl=document.getElementById("result");
+
+function renderQuestion(item){
+  const card=document.createElement("article");
+  card.className="q-card";
+  card.dataset.qn=item.n;
+  card.dataset.type=item.type;
+  const h=document.createElement("h3");
+  h.innerHTML='<span class="q-num">'+item.n+'.</span> '+item.q;
+  card.appendChild(h);
+  if(item.type==="single"){
+    const opts=document.createElement("div");
+    opts.className="q-options";
+    LETTERS.forEach(L=>{
+      if(!item.options[L])return;
+      const id="q"+item.n+"_"+L;
+      const label=document.createElement("label");
+      label.setAttribute("for",id);
+      label.innerHTML='<input type="radio" id="'+id+'" name="q'+item.n+'" value="'+L+'"><span><strong>'+L+'.</strong> '+item.options[L]+'</span>';
+      opts.appendChild(label);
+    });
+    card.appendChild(opts);
+  } else if(item.type==="match"){
+    const wrap=document.createElement("div");
+    wrap.className="q-match";
+    item.left.forEach((leftText,i)=>{
+      const row=document.createElement("div");
+      row.className="q-match-row";
+      row.dataset.idx=i;
+      const span=document.createElement("span");
+      span.innerHTML='<strong>'+(i+1)+'.</strong> '+leftText;
+      const sel=document.createElement("select");
+      sel.name="q"+item.n+"_"+i;
+      sel.innerHTML='<option value="">—</option>'+LETTERS.map(L=>'<option value="'+L+'">'+L+'</option>').join("");
+      row.appendChild(span);
+      row.appendChild(sel);
+      wrap.appendChild(row);
+    });
+    const legend=document.createElement("div");
+    legend.style.marginTop=".5rem";
+    legend.style.fontSize=".93rem";
+    legend.style.color="var(--muted)";
+    legend.innerHTML=LETTERS.map(L=>item.right[L]?'<div><strong>'+L+'.</strong> '+item.right[L]+'</div>':'').join("");
+    card.appendChild(wrap);
+    card.appendChild(legend);
+  }
+  const exp=document.createElement("div");
+  exp.className="q-explain";
+  exp.innerHTML='<strong>Пояснение.</strong> '+item.explain;
+  card.appendChild(exp);
+  return card;
+}
+
+BLOCKS.forEach(block=>{
+  const title=document.createElement("h2");
+  title.className="block-title";
+  title.textContent=block.title;
+  form.appendChild(title);
+  block.questions.forEach(q=>form.appendChild(renderQuestion(q)));
+});
+
+function clearMarks(){
+  form.querySelectorAll(".q-options label").forEach(el=>el.classList.remove("is-correct","is-wrong"));
+  form.querySelectorAll(".q-match-row").forEach(el=>el.classList.remove("is-correct","is-wrong"));
+  form.querySelectorAll(".q-explain").forEach(el=>el.classList.remove("show"));
+}
+
+function gradeText(score){
+  if(score>=29)return"Отличное понимание модуля.";
+  if(score>=24)return"Хорошее понимание, стоит повторить отдельные детали.";
+  if(score>=18)return"Базовая картина есть, вернитесь к сложным темам.";
+  return"Лучше пересмотреть лекции и пройти тест заново.";
+}
+
+function check(){
+  let score=0,total=0,answered=0;
+  BLOCKS.forEach(block=>block.questions.forEach(item=>{
+    const card=form.querySelector('.q-card[data-qn="'+item.n+'"]');
+    if(item.type==="single"){
+      total+=1;
+      const sel=card.querySelector('input[name="q'+item.n+'"]:checked');
+      const labels=card.querySelectorAll(".q-options label");
+      labels.forEach(l=>{
+        const v=l.querySelector("input").value;
+        if(v===item.correct)l.classList.add("is-correct");
+      });
+      if(sel){
+        answered+=1;
+        if(sel.value===item.correct){score+=1;}
+        else{sel.closest("label").classList.add("is-wrong");}
+      }
+    } else if(item.type==="match"){
+      total+=1;
+      const rows=card.querySelectorAll(".q-match-row");
+      let anyAnswered=false,allRight=true;
+      rows.forEach((row,i)=>{
+        const sel=row.querySelector("select");
+        const val=sel.value;
+        if(val)anyAnswered=true;
+        if(val===item.correct[i]){row.classList.add("is-correct");}
+        else{allRight=false;if(val)row.classList.add("is-wrong");}
+      });
+      if(anyAnswered){answered+=1;if(allRight)score+=1;}
+      else allRight=false;
+    }
+    card.querySelector(".q-explain").classList.add("show");
+  }));
+  resultEl.innerHTML='<span class="score">'+score+' из '+total+' баллов</span><span class="grade">'+gradeText(score)+'</span>';
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function reset(){
+  clearMarks();
+  form.querySelectorAll("input[type=radio]").forEach(i=>i.checked=false);
+  form.querySelectorAll("select").forEach(s=>s.value="");
+  resultEl.textContent="Ответьте на вопросы и нажмите «Проверить ответы».";
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+document.getElementById("check-btn").addEventListener("click",()=>{clearMarks();check();});
+document.getElementById("reset-btn").addEventListener("click",reset);
+</script>
 </body>
 </html>
